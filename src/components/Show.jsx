@@ -1,8 +1,10 @@
 
 import { useState,useEffect } from "react";
-import { Link } from "react-router-dom"
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore"
+
+import { collection, getDocs } from "firebase/firestore"
 import { db } from "../firebaseConfig/firebase.js"
+import './ItemGrid.css'
+import {ShowCard} from "./ShowCard"
 
 import NavBar from "./NavBar"
 
@@ -36,39 +38,13 @@ const Show = ()=>{
     return (
         <>
         <NavBar></NavBar>
-        <div className="container">
-            <div className="row">
-                <div className="col">
-                    <div className="d-grid gap-2">
-                 
-                    </div>
-                    <table className="table table-dark table hover">
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Stock</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {products.map((product) => (
-                                <tr key={product.id}>
-                                    <td>{product.nombre}</td>
-                                    <td>{product.stock}</td>
-                                    <td>
-                                        
-                                    <Link to ={`/item/${product.id}`} className="btn btn-primary"><i className="fa-solid fa-pencil"></i> </Link>
-                                    </td>
-                                </tr>
-                            ))}
-                            
+        <ul className="moviesGrid">
+            {products.map((product)=>(
+                <ShowCard  key={product.id} item={product}/>
+            )
+            )}
+        </ul>
 
-                         
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
         </>
 
     )
